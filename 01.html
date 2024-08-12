@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <title>Vue Laracast Course</title>
+</head>
+<body>
+  
+  <div id="app">
+    <p>
+      <input v-model="greeting" type="text" />
+    </p>
+
+    <p>
+      {{ greeting }} ({{ greeting.length }} characters.)
+    </p>
+  </div>
+
+  <script>
+    Vue.createApp({
+      data() {
+        return {
+          greeting: 'Hello World'
+        };
+      }
+    }).mount('#app');
+  </script>
+
+</body>
+</html>

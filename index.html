@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+  <!-- Tailwindcss -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <title>Vue Laracast Course</title>
+
+</head>
+
+<body class="h-full grid place-items-center">
+
+  <div id="app">
+    <section>
+
+      <h2 class="font-bold text-2xl mb-2">In Progress Assignments</h2>
+
+      <ul>
+        <li v-for="assignment in assignments.filter(a => !a.complete)" :key="assignment.id">
+          <label>
+            {{ assignment.name }}
+            <input type="checkbox" v-model="assignment.complete">
+          </label>
+        </li>
+
+      </ul>
+
+    </section>
+
+    <section v-show="assignments.filter(a => a.complete).length" class="mt-8">
+
+      <h2 class="font-bold text-2xl mb-2">Completed Assignments</h2>
+
+      <ul>
+        <li v-for="assignment in assignments.filter(a => a.complete)">
+          <label>
+            {{ assignment.name }}
+            <input type="checkbox" v-model="assignment.complete" :key="assignment.id">
+          </label>
+        </li>
+
+      </ul>
+
+    </section>
+
+  </div>
+
+  <script>
+    Vue.createApp({
+      data() {
+        return {
+          assignments: [
+            { id: 1, name: 'Finish project', complete: false },
+            { id: 2, name: 'Read chapter 4', complete: true },
+            { id: 3, name: 'Turn in homework', complete: false },
+          ]
+        }
+      }
+    }).mount('#app');
+  </script>
+
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <title>Vue Laracast Course</title>
+
+  <style>
+    body {
+      display: grid;
+      place-items: center;
+      height: 100vh;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 20px;
+      border: solid 1px darkgreen;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .text-red {
+      color: red;
+    }
+
+    .text-green {
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  
+  <div id="app">
+    <button :class="active ? 'text-red' : 'text-green'" @click="toggle">Click me!</button>
+  </div>
+
+  <script>
+    Vue.createApp({
+      data() {
+        return {
+          buttonClasses: 'text-green',
+          active: false
+        };
+      },
+      methods: {
+        toggle() {
+          this.active = !this.active;
+        }
+      }
+    }).mount('#app');
+  </script>
+
+</body>
+</html>
