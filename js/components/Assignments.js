@@ -1,8 +1,10 @@
 import AssignmentList from "./AssignmentList.js";
+import AssignmentCreate from "./AssignmentCreate.js";
 
 export default {
   components: {
-    AssignmentList
+    AssignmentList,
+    AssignmentCreate,
   },
 
   template: /*html*/`
@@ -15,15 +17,17 @@ export default {
       title="Completed Assignments"
       :assignments="filters.completed"
     />
+
+    <assignment-create @add="add" />
   `,
 
   data() {
     return {
       assignments: [
         { id: 1, name: 'Finish project', complete: false },
-        { id: 2, name: 'Read chapter 4', complete: true },
+        { id: 2, name: 'Read chapter 4', complete: false },
         { id: 3, name: 'Turn in homework', complete: false },
-      ]
+      ],
     }
   },
 
@@ -33,6 +37,16 @@ export default {
         inProgress: this.assignments.filter(assignment => !assignment.complete),
         completed: this.assignments.filter(assignment => assignment.complete),
       }
+    }
+  },
+
+  methods: {
+    add(name) {
+      this.assignments.push({
+        id: this.assignments.length + 1,
+        name,
+        complete: false,
+      });
     }
   }
 

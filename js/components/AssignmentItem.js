@@ -1,9 +1,9 @@
 export default {
   template: /*html*/ `
-    <li>
-      <label class="block cursor-pointer">
+    <li class="">
+      <label class="flex justify-between items-center cursor-pointer px-2 py-1">
         {{ assignment.name }}
-        <input type="checkbox" v-model="assignment.complete" class="cursor-pointer">
+        <input type="checkbox" v-model="assignment.complete" class="cursor-pointer mr-2">
       </label>
     </li>
   `,
