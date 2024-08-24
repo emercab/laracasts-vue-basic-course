@@ -8,26 +8,30 @@ export default {
   },
 
   template: /*html*/`
-    <assignment-list
-      title="In Progress Assignments"
-      :assignments="filters.inProgress"
-    />
+    <section class="flex gap-10 m-w-4/5">
 
-    <assignment-list
-      title="Completed Assignments"
-      :assignments="filters.completed"
-    />
+      <assignment-list
+        title="In Progress Assignments"
+        :assignments="filters.inProgress"
+      >
+        <assignment-create @add="add" />
+      </assignment-list>
 
-    <assignment-create @add="add" />
+      <assignment-list
+        v-if="showCompleted"
+        title="Completed Assignments"
+        :assignments="filters.completed"
+        canHide
+        @hide="showCompleted = !showCompleted"
+      />
+
+    </section>
   `,
 
   data() {
     return {
-      assignments: [
-        { id: 1, name: 'Finish project', complete: false, tag: 'math' },
-        { id: 2, name: 'Read chapter 4', complete: false, tag: 'science' },
-        { id: 3, name: 'Turn in homework', complete: false, tag: 'math' },
-      ],
+      assignments: [],
+      showCompleted: true,
     }
   },
 
@@ -40,12 +44,19 @@ export default {
     }
   },
 
+  created() {
+    fetch('http://localhost:3001/assignments')
+      .then(response => response.json())
+      .then(data => this.assignments = data)
+  },
+
   methods: {
     add(name) {
       this.assignments.push({
         id: this.assignments.length + 1,
         name,
         complete: false,
+        tag: 'math',
       });
     }
   }
